@@ -428,8 +428,8 @@
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;">Cartera Total</div>
         <div style="font-size:32px;font-weight:800;color:var(--brand-primary);">$876 M</div>
         <div style="margin-top:16px;font-size:12px;color:var(--text-muted);">
-          <div style="margin-bottom:6px;"><span style="display:inline-block;width:12px;height:12px;background:#4A4A4A;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Arrendamiento: {aieh_cartera_total_js:,}</div>
-          <div><span style="display:inline-block;width:12px;height:12px;background:#C8C0B0;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Crédito: {tparss_cartera_total_js:,}</div>
+          <div style="margin-bottom:6px;"><span style="display:inline-block;width:12px;height:12px;background:#4A4A4A;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Arrendamiento: 837,980</div>
+          <div><span style="display:inline-block;width:12px;height:12px;background:#C8C0B0;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Crédito: 38,310</div>
         </div>
       </div>
     </div>
@@ -471,7 +471,7 @@ new Chart(document.getElementById('chartActivo'), {
 });
 new Chart(document.getElementById('chartCliente'), {
   type:'doughnut',
-  data:{ labels:["Secretar\u00eda de Agricultura y De", "GIM Compa\u00f1\u00eda Editorial", "Cadena Tres I", "Proveedora de Contenidos GIM"], datasets:[{ data:[790552, 8157, 24959, 14312], backgroundColor:['#4A4A4A','#C8C0B0','#9A9288','#7A7269'], borderWidth:2, borderColor:'#fff' }] },
+  data:{ labels:["Secretar\u00eda de Agricultura y De", "Cadena Tres I", "Proveedora de Contenidos GIM", "GIM Compa\u00f1\u00eda Editorial"], datasets:[{ data:[790552, 24959, 14312, 8157], backgroundColor:['#4A4A4A','#C8C0B0','#9A9288','#7A7269'], borderWidth:2, borderColor:'#fff' }] },
   options:cartPieOpts(837980)
 });
 new Chart(document.getElementById('chartIngreso'), {
@@ -484,8 +484,8 @@ new Chart(document.getElementById('chartIngreso'), {
 });
 new Chart(document.getElementById('chartCartaCredito'), {
   type:'doughnut',
-  data:{ labels:["AIEH", "Arrendadora Cartago"], datasets:[{ data:[177667, 38310], backgroundColor:['#4A4A4A','#C8C0B0'], borderWidth:2, borderColor:'#fff' }] },
-  options:cartPieOpts(215977)
+  data:{ labels:["Arrendadora Cartago"], datasets:[{ data:[38310], backgroundColor:['#4A4A4A','#C8C0B0'], borderWidth:2, borderColor:'#fff' }] },
+  options:cartPieOpts(38310)
 });
 new Chart(document.getElementById('chartIngMes'), {
   type:'doughnut',
@@ -635,7 +635,7 @@ function updateTparssOpex(label) {
 
 // Cartera Total Consolidado
 var cartTotalArr  = 837980;
-var cartTotalCred = 215977;
+var cartTotalCred = 38310;
 var cartTotalSum  = (cartTotalArr + cartTotalCred) || 1;
 new Chart(document.getElementById('chartCarteraTotal'), {
   type:'doughnut',
