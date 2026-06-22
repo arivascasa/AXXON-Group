@@ -142,64 +142,7 @@
       <div class="entity-kpi"><div class="entity-kpi-label">Pasivos Totales</div><div class="entity-kpi-value">$677,235</div></div>
     </div>
   </div>
-  <p class="section-title">Sistema Konfront — Estado del Proyecto</p>
-  <div class="card">
-    <div class="konfront-grid">
-      <div class="konfront-row" style="font-weight:700;font-size:11px;color:var(--text-muted);background:none;text-transform:uppercase;letter-spacing:.5px">
-        <div>Etapa</div><div>Periodo</div><div>Estatus</div><div>Progreso</div><div>Avance</div>
-      </div>
-      <div class="konfront-row">
-          <div class="etapa">Kick-off</div>
-          <div class="periodo">abr-26</div>
-          <div><span class="badge completado">Completado</span></div>
-          <div><div class="progress-bar"><div class="progress-fill full" style="width:100%"></div></div></div>
-          <div class="progress-pct">100%</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">Sesiones exploratorias</div>
-          <div class="periodo">Abril–Mayo 2026</div>
-          <div><span class="badge en-curso">En curso</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
-          <div class="progress-pct">5 de N</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">Prototipo alta fidelidad</div>
-          <div class="periodo">May–Ago 2026</div>
-          <div><span class="badge pendiente">Pendiente</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
-          <div class="progress-pct">90%</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">Pruebas</div>
-          <div class="periodo">Jul–Dic 26</div>
-          <div><span class="badge pendiente">Pendiente</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
-          <div class="progress-pct">0%</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">GO LIVE Bancos</div>
-          <div class="periodo">ago-26</div>
-          <div><span class="badge pendiente">Pendiente</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
-          <div class="progress-pct">0%</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">GO LIVE Intercompañías</div>
-          <div class="periodo">Sep–Oct 2026</div>
-          <div><span class="badge pendiente">Pendiente</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
-          <div class="progress-pct">0%</div>
-        </div>
-<div class="konfront-row">
-          <div class="etapa">GO LIVE Gobierno</div>
-          <div class="periodo">ene-27</div>
-          <div><span class="badge pendiente">Pendiente</span></div>
-          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
-          <div class="progress-pct">0%</div>
-        </div>
 
-    </div>
-  </div>
 </div>
 
 <!-- AIEH -->
@@ -658,21 +601,7 @@
     <div class="card"><div class="card-title">Ingresos del Mes</div><div class="chart-wrap"><canvas id="chartIngMes"></canvas></div></div>
     <div class="card"><div class="card-title">Ingresos YTD</div><div class="chart-wrap"><canvas id="chartIngYtd"></canvas></div></div>
   </div>
-  <p class="section-title">OPEX Consolidado</p>
-  <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
-    <div class="kpi-card"><div class="kpi-label">OPEX may-26</div><div class="kpi-value warn">$1,051,794</div><div class="kpi-sub">AIEH + TPARSS</div></div>
-    <div class="kpi-card"><div class="kpi-label">OPEX Acumulado</div><div class="kpi-value warn">$6,958,515</div><div class="kpi-sub">AIEH + TPARSS YTD</div></div>
-  </div>
-  <div class="two-col" style="margin-top:16px;">
-    <div class="card">
-      <div class="card-title">OPEX AIEH — may-26</div>
-      <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexConsol"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">OPEX TPARSS — may-26</div>
-      <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexConsolT"></canvas></div>
-    </div>
-  </div>
+
 </div>
 
 <script>
@@ -748,18 +677,7 @@ new Chart(document.getElementById('chartOpexTPARSS'), {
   data:{ labels:['SIAC', 'Contabilidad'], datasets:[{ data:[9042.0, 10852.0], backgroundColor:opexColors.slice(0,['SIAC', 'Contabilidad'].length), borderWidth:2, borderColor:'#fff' }] },
   options:opexPieOpts(tparssTotal)
 });
-var consolAiehTotal = [10000.0, 84.99999999999997, 431794.5, 20890.000000000004, 3448.2758620689656, 61.20689655172414, 32736.344827586214, 79550.0, 60139.93103448275, 0, 390450.0, 244.82758620689657, 2500.0].reduce(function(a,b){return a+b;},0)||1;
-new Chart(document.getElementById('chartOpexConsol'), {
-  type:'doughnut',
-  data:{ labels:['Caja Chica', 'Comisión por Transferencia Multiva', 'Consultoría', 'Contabilidad', 'Estacionamiento', 'Gastos Legales', 'Impuesto Sobre Nómina', 'Nómina', 'Renta', 'SIAC', 'Sistema', 'Telefonía', 'Viáticos'], datasets:[{ data:[10000.0, 84.99999999999997, 431794.5, 20890.000000000004, 3448.2758620689656, 61.20689655172414, 32736.344827586214, 79550.0, 60139.93103448275, 0, 390450.0, 244.82758620689657, 2500.0], backgroundColor:opexColors.slice(0,['Caja Chica', 'Comisión por Transferencia Multiva', 'Consultoría', 'Contabilidad', 'Estacionamiento', 'Gastos Legales', 'Impuesto Sobre Nómina', 'Nómina', 'Renta', 'SIAC', 'Sistema', 'Telefonía', 'Viáticos'].length), borderWidth:2, borderColor:'#fff' }] },
-  options:opexPieOpts(consolAiehTotal)
-});
-var consolTparssTotal = [0, 0, 0, 10852.043103448277, 0, 0.0, 0, 0, 0.0, 9041.91379310345, 0, 0, 0].reduce(function(a,b){return a+b;},0)||1;
-new Chart(document.getElementById('chartOpexConsolT'), {
-  type:'doughnut',
-  data:{ labels:['Caja Chica', 'Comisión por Transferencia Multiva', 'Consultoría', 'Contabilidad', 'Estacionamiento', 'Gastos Legales', 'Impuesto Sobre Nómina', 'Nómina', 'Renta', 'SIAC', 'Sistema', 'Telefonía', 'Viáticos'], datasets:[{ data:[0, 0, 0, 10852.043103448277, 0, 0.0, 0, 0, 0.0, 9041.91379310345, 0, 0, 0], backgroundColor:opexColors.slice(0,['Caja Chica', 'Comisión por Transferencia Multiva', 'Consultoría', 'Contabilidad', 'Estacionamiento', 'Gastos Legales', 'Impuesto Sobre Nómina', 'Nómina', 'Renta', 'SIAC', 'Sistema', 'Telefonía', 'Viáticos'].length), borderWidth:2, borderColor:'#fff' }] },
-  options:opexPieOpts(consolTparssTotal)
-});
+
 </script>
 
 <!-- PANTALLA DE ACCESO -->
