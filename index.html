@@ -289,19 +289,21 @@
     </table>
   </div>
   <p class="section-title">OPEX</p>
+  <div id="aieh-opex-month-btns" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
   <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
-    <div class="kpi-card"><div class="kpi-label">OPEX jun-26</div><div class="kpi-value warn">$598</div><div class="kpi-sub">Gasto operativo del mes</div></div><div class="kpi-card"><div class="kpi-label">OPEX Acumulado</div><div class="kpi-value warn">$7,213</div><div class="kpi-sub">Gasto operativo YTD</div></div>
+    <div class="kpi-card"><div class="kpi-label" id="aieh-opex-mes-label">OPEX —</div><div class="kpi-value warn" id="aieh-opex-mes-val">—</div><div class="kpi-sub">Gasto operativo del mes</div></div>
+    <div class="kpi-card"><div class="kpi-label">OPEX Acumulado</div><div class="kpi-value warn" id="aieh-opex-ytd-val">—</div><div class="kpi-sub">Gasto operativo YTD</div></div>
   </div>
   <div class="two-col" style="margin-top:16px;">
     <div class="card">
-      <div class="card-title">Desglose por Tipo de Gasto — jun-26</div>
+      <div class="card-title" id="aieh-opex-chart-title">Desglose por Tipo de Gasto</div>
       <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexAIEH"></canvas></div>
     </div>
     <div class="card">
       <div class="card-title">Detalle OPEX</div>
       <table>
         <thead><tr><th style="width:55%">Concepto</th><th>Mes</th><th>Acumulado</th></tr></thead>
-        <tbody><tr><td>Consultoría</td><td class="num">$432</td><td class="num">$1,628</td></tr><tr><td>Nómina</td><td class="num">$80</td><td class="num">$465</td></tr><tr><td>Renta</td><td class="num">$60</td><td class="num">$306</td></tr><tr><td>Notaría</td><td class="num">$18</td><td class="num">$39</td></tr><tr><td>Otros Gastos</td><td class="num">$5</td><td class="num">$148</td></tr><tr><td>Estacionamiento</td><td class="num">$3</td><td class="num">$21</td></tr><tr><td>Telefonía</td><td class="num">$0</td><td class="num">$3</td></tr><tr><td>Comisión por Transferencia Multiva</td><td class="num">$0</td><td class="num">$1</td></tr><tr><td>Impuesto Sobre Nómina</td><td class="num">$0</td><td class="num">$111</td></tr><tr><td>Sistema</td><td class="num">$0</td><td class="num">$390</td></tr><tr><td>CIL Asesores</td><td class="num">$0</td><td class="num">$3,840</td></tr><tr><td>Contabilidad</td><td class="num">$0</td><td class="num">$149</td></tr><tr><td>Gastos Legales</td><td class="num">$0</td><td class="num">$67</td></tr><tr><td>Viáticos</td><td class="num">$0</td><td class="num">$8</td></tr><tr><td>Buró de Crédito</td><td class="num">$0</td><td class="num">$19</td></tr><tr><td>Estudio de Precios de Transferencia</td><td class="num">$0</td><td class="num">$9</td></tr><tr><td>Caja Chica</td><td class="num">$0</td><td class="num">$10</td></tr><tr class="subtotal"><td>Total OPEX</td><td class="num">$598</td><td class="num">$7,213</td></tr></tbody>
+        <tbody id="aieh-opex-table-body"></tbody>
       </table>
     </div>
   </div>
@@ -487,19 +489,21 @@
     </table>
   </div>
   <p class="section-title">OPEX</p>
+  <div id="tparss-opex-month-btns" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
   <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
-    <div class="kpi-card"><div class="kpi-label">OPEX jun-26</div><div class="kpi-value warn">$31</div><div class="kpi-sub">Gasto operativo del mes</div></div><div class="kpi-card"><div class="kpi-label">OPEX Acumulado</div><div class="kpi-value warn">$375</div><div class="kpi-sub">Gasto operativo YTD</div></div>
+    <div class="kpi-card"><div class="kpi-label" id="tparss-opex-mes-label">OPEX —</div><div class="kpi-value warn" id="tparss-opex-mes-val">—</div><div class="kpi-sub">Gasto operativo del mes</div></div>
+    <div class="kpi-card"><div class="kpi-label">OPEX Acumulado</div><div class="kpi-value warn" id="tparss-opex-ytd-val">—</div><div class="kpi-sub">Gasto operativo YTD</div></div>
   </div>
   <div class="two-col" style="margin-top:16px;">
     <div class="card">
-      <div class="card-title">Desglose por Tipo de Gasto — jun-26</div>
+      <div class="card-title" id="tparss-opex-chart-title">Desglose por Tipo de Gasto</div>
       <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexTPARSS"></canvas></div>
     </div>
     <div class="card">
       <div class="card-title">Detalle OPEX</div>
       <table>
         <thead><tr><th style="width:55%">Concepto</th><th>Mes</th><th>Acumulado</th></tr></thead>
-        <tbody><tr><td>Nómina</td><td class="num">$16</td><td class="num">$16</td></tr><tr><td>Buró de Crédito</td><td class="num">$9</td><td class="num">$9</td></tr><tr><td>Notaría</td><td class="num">$6</td><td class="num">$84</td></tr><tr><td>SIAC</td><td class="num">$0</td><td class="num">$45</td></tr><tr><td>Renta</td><td class="num">$0</td><td class="num">$3</td></tr><tr><td>Contabilidad</td><td class="num">$0</td><td class="num">$54</td></tr><tr><td>Gastos Legales</td><td class="num">$0</td><td class="num">$19</td></tr><tr><td>Auditoría PLD</td><td class="num">$0</td><td class="num">$63</td></tr><tr><td>Cuota CNBV</td><td class="num">$0</td><td class="num">$45</td></tr><tr><td>Otros Gastos</td><td class="num">$0</td><td class="num">$35</td></tr><tr class="subtotal"><td>Total OPEX</td><td class="num">$31</td><td class="num">$375</td></tr></tbody>
+        <tbody id="tparss-opex-table-body"></tbody>
       </table>
     </div>
   </div>
@@ -650,6 +654,8 @@ new Chart(document.getElementById('chartIngYtd'), {
   data:{ labels:["Arrendamiento", "Intereses"], datasets:[{ data:[68163, 1069], backgroundColor:['#4A4A4A','#C8C0B0'], borderWidth:2, borderColor:'#fff' }] },
   options:pieOpts
 });
+// ── OPEX selector de mes ──────────────────────────────────────────────────
+var opexColors = ['#4A4A4A','#7A7269','#C8C0B0','#9A9288','#6B6460','#A09890','#5A5450','#B8B0A0','#8A8480','#D4CCC0','#2D2A28','#E5E1DA','#3A3836'];
 const opexPieOpts = function(total){
   return {
     responsive:true, maintainAspectRatio:false,
@@ -662,19 +668,99 @@ const opexPieOpts = function(total){
     }
   };
 };
-var opexColors = ['#4A4A4A','#7A7269','#C8C0B0','#9A9288','#6B6460','#A09890','#5A5450','#B8B0A0','#8A8480','#D4CCC0','#2D2A28','#E5E1DA','#3A3836'];
-var aiehTotal = ['Consultoría', 'Nómina', 'Renta', 'Notaría', 'Otros Gastos', 'Estacionamiento', 'Telefonía', 'Comisión por Transferencia Multiva'].length>0 ? [432.0, 80.0, 60.0, 18.0, 5.0, 3.0, 0.0, 0.0].reduce(function(a,b){return a+b;},0) : 1;
-new Chart(document.getElementById('chartOpexAIEH'), {
+var aiehOpexData  = [{"month": 1, "label": "ene-26", "total": 353.26, "ytd": 353.26, "cats": [{"label": "N\u00f3mina", "mes": 76.55, "ytd": 76.55}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 27.8, "ytd": 27.8}, {"label": "Consultor\u00eda", "mes": 78.21, "ytd": 78.21}, {"label": "Renta", "mes": 41.18, "ytd": 41.18}, {"label": "Contabilidad", "mes": 54.0, "ytd": 54.0}, {"label": "Gastos Legales", "mes": 27.27, "ytd": 27.27}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 3.45}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 19.2, "ytd": 19.2}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.1, "ytd": 0.1}, {"label": "Otros Gastos", "mes": 25.5, "ytd": 25.5}]}, {"month": 2, "label": "feb-26", "total": 247.2, "ytd": 600.46, "cats": [{"label": "N\u00f3mina", "mes": 76.55, "ytd": 153.1}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 9.87, "ytd": 37.66}, {"label": "Consultor\u00eda", "mes": 73.67, "ytd": 151.88}, {"label": "Renta", "mes": 42.16, "ytd": 83.34}, {"label": "Contabilidad", "mes": 32.45, "ytd": 86.45}, {"label": "Gastos Legales", "mes": 8.62, "ytd": 35.89}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 6.9}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 0.0, "ytd": 19.2}, {"label": "Telefon\u00eda", "mes": 0.35, "ytd": 0.35}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.08, "ytd": 0.18}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 25.5}]}, {"month": 3, "label": "mar-26", "total": 394.63, "ytd": 995.09, "cats": [{"label": "N\u00f3mina", "mes": 76.55, "ytd": 229.65}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 30.09, "ytd": 67.75}, {"label": "Consultor\u00eda", "mes": 180.49, "ytd": 332.37}, {"label": "Renta", "mes": 42.16, "ytd": 125.49}, {"label": "Contabilidad", "mes": 20.89, "ytd": 107.34}, {"label": "Gastos Legales", "mes": 18.97, "ytd": 54.86}, {"label": "Notar\u00eda", "mes": 8.01, "ytd": 8.01}, {"label": "Vi\u00e1ticos", "mes": 5.25, "ytd": 5.25}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 10.34}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 0.0, "ytd": 19.2}, {"label": "Telefon\u00eda", "mes": 0.0, "ytd": 0.35}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.08, "ytd": 0.26}, {"label": "Estudio de Precios de Transferencia", "mes": 8.7, "ytd": 8.7}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 25.5}]}, {"month": 4, "label": "abr-26", "total": 4587.82, "ytd": 5582.91, "cats": [{"label": "N\u00f3mina", "mes": 76.55, "ytd": 306.2}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 10.05, "ytd": 77.8}, {"label": "Consultor\u00eda", "mes": 431.79, "ytd": 764.17}, {"label": "Renta", "mes": 60.14, "ytd": 185.63}, {"label": "CIL Asesores", "mes": 3840.0, "ytd": 3840.0}, {"label": "Contabilidad", "mes": 20.89, "ytd": 128.23}, {"label": "Gastos Legales", "mes": 11.98, "ytd": 66.84}, {"label": "Notar\u00eda", "mes": 13.02, "ytd": 21.03}, {"label": "Vi\u00e1ticos", "mes": 0.0, "ytd": 5.25}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 13.79}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 0.0, "ytd": 19.2}, {"label": "Telefon\u00eda", "mes": 2.6, "ytd": 2.95}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.12, "ytd": 0.39}, {"label": "Estudio de Precios de Transferencia", "mes": 0.0, "ytd": 8.7}, {"label": "Otros Gastos", "mes": 117.22, "ytd": 142.72}]}, {"month": 5, "label": "may-26", "total": 1031.9, "ytd": 6614.81, "cats": [{"label": "N\u00f3mina", "mes": 79.55, "ytd": 385.75}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 32.74, "ytd": 110.54}, {"label": "Consultor\u00eda", "mes": 431.79, "ytd": 1195.96}, {"label": "Renta", "mes": 60.14, "ytd": 245.77}, {"label": "Sistema", "mes": 390.45, "ytd": 390.45}, {"label": "CIL Asesores", "mes": 0.0, "ytd": 3840.0}, {"label": "Contabilidad", "mes": 20.89, "ytd": 149.12}, {"label": "Gastos Legales", "mes": 0.06, "ytd": 66.9}, {"label": "Notar\u00eda", "mes": 0.0, "ytd": 21.03}, {"label": "Vi\u00e1ticos", "mes": 2.5, "ytd": 7.75}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 17.24}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 0.0, "ytd": 19.2}, {"label": "Telefon\u00eda", "mes": 0.24, "ytd": 3.19}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.08, "ytd": 0.47}, {"label": "Estudio de Precios de Transferencia", "mes": 0.0, "ytd": 8.7}, {"label": "Caja Chica", "mes": 10.0, "ytd": 10.0}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 142.72}]}, {"month": 6, "label": "jun-26", "total": 598.36, "ytd": 7213.17, "cats": [{"label": "N\u00f3mina", "mes": 79.55, "ytd": 465.3}, {"label": "Impuesto Sobre N\u00f3mina", "mes": 0.0, "ytd": 110.54}, {"label": "Consultor\u00eda", "mes": 431.79, "ytd": 1627.75}, {"label": "Renta", "mes": 60.14, "ytd": 305.91}, {"label": "Sistema", "mes": 0.0, "ytd": 390.45}, {"label": "CIL Asesores", "mes": 0.0, "ytd": 3840.0}, {"label": "Contabilidad", "mes": 0.0, "ytd": 149.12}, {"label": "Gastos Legales", "mes": 0.0, "ytd": 66.9}, {"label": "Notar\u00eda", "mes": 18.08, "ytd": 39.11}, {"label": "Vi\u00e1ticos", "mes": 0.0, "ytd": 7.75}, {"label": "Estacionamiento", "mes": 3.45, "ytd": 20.69}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 0.0, "ytd": 19.2}, {"label": "Telefon\u00eda", "mes": 0.23, "ytd": 3.42}, {"label": "Comisi\u00f3n por Transferencia Multiva", "mes": 0.05, "ytd": 0.53}, {"label": "Estudio de Precios de Transferencia", "mes": 0.0, "ytd": 8.7}, {"label": "Caja Chica", "mes": 0.0, "ytd": 10.0}, {"label": "Otros Gastos", "mes": 5.06, "ytd": 147.78}]}];
+var tparssOpexData = [{"month": 1, "label": "ene-26", "total": 19.89, "ytd": 19.89, "cats": [{"label": "SIAC", "mes": 9.04, "ytd": 9.04}, {"label": "Contabilidad", "mes": 10.85, "ytd": 10.85}]}, {"month": 2, "label": "feb-26", "total": 138.8, "ytd": 158.69, "cats": [{"label": "SIAC", "mes": 9.04, "ytd": 18.08}, {"label": "Renta", "mes": 3.48, "ytd": 3.48}, {"label": "Contabilidad", "mes": 10.85, "ytd": 21.7}, {"label": "Gastos Legales", "mes": 18.96, "ytd": 18.96}, {"label": "Notar\u00eda", "mes": 70.34, "ytd": 70.34}, {"label": "Otros Gastos", "mes": 26.12, "ytd": 26.12}]}, {"month": 3, "label": "mar-26", "total": 144.9, "ytd": 303.59, "cats": [{"label": "SIAC", "mes": 9.04, "ytd": 27.13}, {"label": "Renta", "mes": 0.0, "ytd": 3.48}, {"label": "Contabilidad", "mes": 10.85, "ytd": 32.56}, {"label": "Gastos Legales", "mes": 0.0, "ytd": 18.96}, {"label": "Notar\u00eda", "mes": 8.0, "ytd": 78.35}, {"label": "Auditor\u00eda PLD", "mes": 63.0, "ytd": 63.0}, {"label": "Cuota CNBV", "mes": 45.38, "ytd": 45.38}, {"label": "Otros Gastos", "mes": 8.62, "ytd": 34.74}]}, {"month": 4, "label": "abr-26", "total": 20.22, "ytd": 323.81, "cats": [{"label": "SIAC", "mes": 9.04, "ytd": 36.17}, {"label": "Renta", "mes": 0.0, "ytd": 3.48}, {"label": "Contabilidad", "mes": 10.85, "ytd": 43.41}, {"label": "Gastos Legales", "mes": 0.32, "ytd": 19.28}, {"label": "Notar\u00eda", "mes": 0.0, "ytd": 78.35}, {"label": "Auditor\u00eda PLD", "mes": 0.0, "ytd": 63.0}, {"label": "Cuota CNBV", "mes": 0.0, "ytd": 45.38}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 34.74}]}, {"month": 5, "label": "may-26", "total": 19.89, "ytd": 343.7, "cats": [{"label": "SIAC", "mes": 9.04, "ytd": 45.21}, {"label": "Renta", "mes": 0.0, "ytd": 3.48}, {"label": "Contabilidad", "mes": 10.85, "ytd": 54.26}, {"label": "Gastos Legales", "mes": 0.0, "ytd": 19.28}, {"label": "Notar\u00eda", "mes": 0.0, "ytd": 78.35}, {"label": "Auditor\u00eda PLD", "mes": 0.0, "ytd": 63.0}, {"label": "Cuota CNBV", "mes": 0.0, "ytd": 45.38}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 34.74}]}, {"month": 6, "label": "jun-26", "total": 30.88, "ytd": 374.58, "cats": [{"label": "N\u00f3mina", "mes": 16.04, "ytd": 16.04}, {"label": "SIAC", "mes": 0.0, "ytd": 45.21}, {"label": "Renta", "mes": 0.0, "ytd": 3.48}, {"label": "Contabilidad", "mes": 0.0, "ytd": 54.26}, {"label": "Gastos Legales", "mes": 0.0, "ytd": 19.28}, {"label": "Notar\u00eda", "mes": 5.84, "ytd": 84.18}, {"label": "Auditor\u00eda PLD", "mes": 0.0, "ytd": 63.0}, {"label": "Cuota CNBV", "mes": 0.0, "ytd": 45.38}, {"label": "Bur\u00f3 de Cr\u00e9dito", "mes": 9.0, "ytd": 9.0}, {"label": "Otros Gastos", "mes": 0.0, "ytd": 34.74}]}];
+var aiehOpexChart  = null;
+var tparssOpexChart = null;
+
+function fmtOpex(v){ return '$'+Math.round(v).toLocaleString('en-US'); }
+
+function buildOpexBtns(data, containerId, updateFn, activeLabel) {
+  var c = document.getElementById(containerId);
+  if(!c) return;
+  c.innerHTML = '';
+  data.forEach(function(m) {
+    var btn = document.createElement('button');
+    btn.textContent = m.label.toUpperCase();
+    btn.style.cssText = 'padding:4px 10px;border-radius:12px;border:1px solid #9A9288;background:'+(m.label===activeLabel?'#4A4A4A':'transparent')+';color:'+(m.label===activeLabel?'#fff':'#4A4A4A')+';font-size:11px;cursor:pointer;';
+    btn.onclick = function() { updateFn(m.label); };
+    c.appendChild(btn);
+  });
+}
+
+function updateAiehOpex(label) {
+  var m = aiehOpexData.find(function(x){return x.label===label;});
+  if(!m) return;
+  document.getElementById('aieh-opex-mes-label').textContent = 'OPEX '+label.toUpperCase();
+  document.getElementById('aieh-opex-mes-val').textContent   = fmtOpex(m.total);
+  document.getElementById('aieh-opex-ytd-val').textContent   = fmtOpex(m.ytd);
+  document.getElementById('aieh-opex-chart-title').textContent = 'Desglose por Tipo de Gasto — '+label.toUpperCase();
+  // tabla
+  var sorted = m.cats.slice().sort(function(a,b){return b.mes-a.mes;});
+  var rows = sorted.map(function(r){
+    return '<tr><td>'+r.label+'</td><td>'+fmtOpex(r.mes)+'</td><td>'+fmtOpex(r.ytd)+'</td></tr>';
+  }).join('');
+  rows += '<tr style="background:#E5E1DA;font-weight:700"><td>Total</td><td>'+fmtOpex(m.total)+'</td><td>'+fmtOpex(m.ytd)+'</td></tr>';
+  document.getElementById('aieh-opex-table-body').innerHTML = rows;
+  // chart
+  var cats = m.cats.filter(function(c){return c.mes>0.01;}).sort(function(a,b){return b.mes-a.mes;});
+  var labels = cats.map(function(c){return c.label;});
+  var vals   = cats.map(function(c){return c.mes;});
+  var total  = vals.reduce(function(a,b){return a+b;},0)||1;
+  if(aiehOpexChart) {
+    aiehOpexChart.data.labels = labels;
+    aiehOpexChart.data.datasets[0].data = vals;
+    aiehOpexChart.data.datasets[0].backgroundColor = opexColors.slice(0,labels.length);
+    aiehOpexChart.options = opexPieOpts(total);
+    aiehOpexChart.update();
+  }
+  buildOpexBtns(aiehOpexData,'aieh-opex-month-btns',updateAiehOpex,label);
+}
+
+function updateTparssOpex(label) {
+  var m = tparssOpexData.find(function(x){return x.label===label;});
+  if(!m) return;
+  document.getElementById('tparss-opex-mes-label').textContent = 'OPEX '+label.toUpperCase();
+  document.getElementById('tparss-opex-mes-val').textContent   = fmtOpex(m.total);
+  document.getElementById('tparss-opex-ytd-val').textContent   = fmtOpex(m.ytd);
+  document.getElementById('tparss-opex-chart-title').textContent = 'Desglose por Tipo de Gasto — '+label.toUpperCase();
+  var sorted = m.cats.slice().sort(function(a,b){return b.mes-a.mes;});
+  var rows = sorted.map(function(r){
+    return '<tr><td>'+r.label+'</td><td>'+fmtOpex(r.mes)+'</td><td>'+fmtOpex(r.ytd)+'</td></tr>';
+  }).join('');
+  rows += '<tr style="background:#E5E1DA;font-weight:700"><td>Total</td><td>'+fmtOpex(m.total)+'</td><td>'+fmtOpex(m.ytd)+'</td></tr>';
+  document.getElementById('tparss-opex-table-body').innerHTML = rows;
+  var cats = m.cats.filter(function(c){return c.mes>0.01;}).sort(function(a,b){return b.mes-a.mes;});
+  var labels = cats.map(function(c){return c.label;});
+  var vals   = cats.map(function(c){return c.mes;});
+  var total  = vals.reduce(function(a,b){return a+b;},0)||1;
+  if(tparssOpexChart) {
+    tparssOpexChart.data.labels = labels;
+    tparssOpexChart.data.datasets[0].data = vals;
+    tparssOpexChart.data.datasets[0].backgroundColor = opexColors.slice(0,labels.length);
+    tparssOpexChart.options = opexPieOpts(total);
+    tparssOpexChart.update();
+  }
+  buildOpexBtns(tparssOpexData,'tparss-opex-month-btns',updateTparssOpex,label);
+}
+
+// Inicializar charts y seleccionar último mes disponible
+var aiehInitLabel  = aiehOpexData.length  ? aiehOpexData[aiehOpexData.length-1].label   : '';
+var tparssInitLabel = tparssOpexData.length ? tparssOpexData[tparssOpexData.length-1].label : '';
+var aiehInitData = aiehOpexData.length ? aiehOpexData[aiehOpexData.length-1].cats.filter(function(c){return c.mes>0.01;}).sort(function(a,b){return b.mes-a.mes;}) : [];
+var tparssInitData = tparssOpexData.length ? tparssOpexData[tparssOpexData.length-1].cats.filter(function(c){return c.mes>0.01;}).sort(function(a,b){return b.mes-a.mes;}) : [];
+aiehOpexChart = new Chart(document.getElementById('chartOpexAIEH'), {
   type:'doughnut',
-  data:{ labels:['Consultoría', 'Nómina', 'Renta', 'Notaría', 'Otros Gastos', 'Estacionamiento', 'Telefonía', 'Comisión por Transferencia Multiva'], datasets:[{ data:[432.0, 80.0, 60.0, 18.0, 5.0, 3.0, 0.0, 0.0], backgroundColor:opexColors.slice(0,['Consultoría', 'Nómina', 'Renta', 'Notaría', 'Otros Gastos', 'Estacionamiento', 'Telefonía', 'Comisión por Transferencia Multiva'].length), borderWidth:2, borderColor:'#fff' }] },
-  options:opexPieOpts(aiehTotal)
+  data:{ labels:aiehInitData.map(function(c){return c.label;}), datasets:[{ data:aiehInitData.map(function(c){return c.mes;}), backgroundColor:opexColors.slice(0,aiehInitData.length), borderWidth:2, borderColor:'#fff' }] },
+  options:opexPieOpts(aiehInitData.reduce(function(a,c){return a+c.mes;},0)||1)
 });
-var tparssTotal = ['Nómina', 'Buró de Crédito', 'Notaría'].length>0 ? [16.0, 9.0, 6.0].reduce(function(a,b){return a+b;},0) : 1;
-new Chart(document.getElementById('chartOpexTPARSS'), {
+tparssOpexChart = new Chart(document.getElementById('chartOpexTPARSS'), {
   type:'doughnut',
-  data:{ labels:['Nómina', 'Buró de Crédito', 'Notaría'], datasets:[{ data:[16.0, 9.0, 6.0], backgroundColor:opexColors.slice(0,['Nómina', 'Buró de Crédito', 'Notaría'].length), borderWidth:2, borderColor:'#fff' }] },
-  options:opexPieOpts(tparssTotal)
+  data:{ labels:tparssInitData.map(function(c){return c.label;}), datasets:[{ data:tparssInitData.map(function(c){return c.mes;}), backgroundColor:opexColors.slice(0,tparssInitData.length), borderWidth:2, borderColor:'#fff' }] },
+  options:opexPieOpts(tparssInitData.reduce(function(a,c){return a+c.mes;},0)||1)
 });
+updateAiehOpex(aiehInitLabel);
+updateTparssOpex(tparssInitLabel);
 
 </script>
 
