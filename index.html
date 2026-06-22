@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXXON Group — Dashboard Ejecutivo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  /* Paleta One Pager — actualizar con manual de marca cuando esté disponible */
+  :root {
+    --brand-primary:   #4A4A4A;   /* Carbón oscuro — header y nav */
+    --brand-accent:    #C8C0B0;   /* Arena/taupe — barras de sección */
+    --brand-highlight: #0E2841;   /* Azul marino — énfasis y acentos */
+    --brand-warn:      #B22222;   /* Rojo oscuro — valores negativos */
+    --pos-color:       #1A5C2A;   /* Verde oscuro — valores positivos */
+    --brand-bg:        #F4F2EF;   /* Fondo cálido */
+    --card-bg:         #FFFFFF;
+    --text-main:       #2D2D2D;
+    --text-muted:      #7A7269;
+    --border:          #D4CCBF;
+    --cream:           #E5E1DA;   /* Texto sobre fondos oscuros */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--brand-bg); color: var(--text-main); font-size: 14px; }
+  header { background: var(--brand-primary); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 60px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+  .header-brand { display: flex; align-items: center; gap: 14px; }
+  .header-logo { width: 38px; height: 38px; background: var(--brand-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: #fff; }
+  .header-title { font-size: 17px; font-weight: 700; }
+  .header-subtitle { font-size: 11px; opacity: .65; margin-top: 1px; }
+  .header-period { font-size: 12px; opacity: .8; background: rgba(255,255,255,.12); padding: 4px 12px; border-radius: 20px; }
+  nav { background: var(--brand-primary); border-top: 1px solid rgba(255,255,255,.1); display: flex; padding: 0 28px; gap: 4px; }
+  nav button { background: none; border: none; color: rgba(255,255,255,.6); font-size: 13px; font-weight: 500; padding: 11px 18px; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; }
+  nav button:hover { color: #fff; }
+  nav button.active { color: #fff; border-bottom-color: var(--brand-highlight); }
+  .page { display: none; padding: 24px 28px 40px; max-width: 1300px; margin: 0 auto; }
+  .page.active { display: block; }
+  .section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--brand-accent); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+  .section-title:first-child { margin-top: 0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .kpi-card { background: var(--card-bg); border-radius: 12px; padding: 20px 22px; box-shadow: 0 1px 6px rgba(0,0,0,.07); border-left: 4px solid var(--brand-accent); }
+  .kpi-card.highlight { border-left-color: var(--brand-highlight); }
+  .kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
+  .kpi-value { font-size: 28px; font-weight: 800; color: var(--brand-primary); line-height: 1; margin-top: 6px; }
+  .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  .card { background: var(--card-bg); border-radius: 12px; padding: 20px 22px; box-shadow: 0 1px 6px rgba(0,0,0,.07); margin-bottom: 16px; }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--brand-primary); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card-title::before { content: ''; display: block; width: 3px; height: 16px; background: var(--brand-highlight); border-radius: 2px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: var(--brand-primary); color: #fff; padding: 9px 12px; text-align: right; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+  thead th:first-child { text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr.subtotal { background: #f0f6ff; font-weight: 700; }
+  tbody tr.total-row { font-weight: 700; background: #f7f9fc; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 9px 12px; text-align: right; }
+  tbody td:first-child { text-align: left; }
+  .neg { color: var(--brand-warn); }
+  .pos { color: #1B8A4C; }
+  .pct { color: var(--text-muted); font-size: 12px; }
+  .konfront-grid { display: grid; gap: 10px; }
+  .konfront-row { display: grid; grid-template-columns: 200px 110px 110px 1fr 70px; align-items: center; gap: 12px; padding: 10px 14px; background: var(--brand-bg); border-radius: 8px; font-size: 12px; }
+  .konfront-row:nth-child(even) { background: #EEF2F8; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge.completado { background: #D4F5E2; color: #1B8A4C; }
+  .badge.en-curso { background: #FFF3CD; color: #9A6300; }
+  .badge.pendiente { background: #F0F0F0; color: #666; }
+  .progress-bar { background: var(--border); border-radius: 10px; height: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 10px; background: var(--brand-highlight); }
+  .progress-fill.full { background: #1B8A4C; }
+  .progress-pct { font-weight: 700; font-size: 12px; color: var(--text-muted); text-align: right; }
+  .chart-wrap { position: relative; height: 240px; }
+  .entity-summary { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.07); margin-bottom: 16px; }
+  .entity-header { background: var(--brand-primary); color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .entity-header h3 { font-size: 14px; font-weight: 700; }
+  .entity-header span { font-size: 11px; opacity: .7; }
+  .entity-kpis { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .entity-kpi { padding: 14px 20px; border-right: 1px solid var(--border); }
+  .entity-kpi:last-child { border-right: none; }
+  .entity-kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: .7px; color: var(--text-muted); }
+  .entity-kpi-value { font-size: 20px; font-weight: 800; color: var(--brand-primary); margin-top: 3px; }
+  .entity-kpi-value.neg { color: var(--brand-warn); }
+  .update-note { font-size: 11px; color: var(--text-muted); background: var(--brand-bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .update-dot { width: 8px; height: 8px; background: var(--brand-highlight); border-radius: 50%; flex-shrink: 0; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } nav button { padding: 10px 10px; font-size: 11px; } .konfront-row { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-brand">
+    <div class="header-logo">AX</div>
+    <div>
+      <div class="header-title">AXXON Group</div>
+      <div class="header-subtitle">Dashboard Ejecutivo — AIEH · TPARSS</div>
+    </div>
+  </div>
+  <div class="header-period">Reporte may-26 · Cifras en miles de pesos</div>
+</header>
+<nav>
+  <button class="active" onclick="showPage('inicio')">🏠 Inicio</button>
+  <button onclick="showPage('aieh')">📋 Arrendadora IEH</button>
+  <button onclick="showPage('tparss')">📋 TPARSS</button>
+  <button onclick="showPage('consolidado')">📊 Consolidado</button>
+</nav>
+
+<!-- INICIO -->
+<div class="page active" id="inicio">
+  <div class="update-note"><div class="update-dot"></div>
+    Datos al cierre de may-26 · Generado automáticamente el 22/06/2026
+  </div>
+  <p class="section-title">Indicadores Clave del Grupo</p>
+  <div class="kpi-grid">
+    <div class="kpi-card highlight"><div class="kpi-label">Cartera Total</div><div class="kpi-value">$876 M</div><div class="kpi-sub">Grupo Consolidado</div></div>
+    <div class="kpi-card"><div class="kpi-label">Margen Financiero</div><div class="kpi-value">50.3%</div><div class="kpi-sub">Sobre ingreso total</div></div>
+    <div class="kpi-card"><div class="kpi-label">Utilidad / Cartera</div><div class="kpi-value">5.7%</div><div class="kpi-sub">Rentabilidad de cartera</div></div>
+    <div class="kpi-card highlight"><div class="kpi-label">Utilidad Inventa</div><div class="kpi-value">$4,182</div><div class="kpi-sub">Resultado neto</div></div>
+  </div>
+  <p class="section-title">Resumen por Entidad — may-26</p>
+  <div class="entity-summary">
+    <div class="entity-header"><h3>Arrendadora IEH</h3><span>Arrendamiento de activos</span></div>
+    <div class="entity-kpis">
+      <div class="entity-kpi"><div class="entity-kpi-label">Ingreso Total (mes)</div><div class="entity-kpi-value">$13,874</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Margen Operativo (mes)</div><div class="entity-kpi-value">$5,197</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Utilidad antes Imp. (mes)</div><div class="entity-kpi-value neg">$(6,995)</div></div>
+    </div>
+    <div class="entity-kpis" style="border-top:1px solid var(--border)">
+      <div class="entity-kpi"><div class="entity-kpi-label">Cartera Arrendamiento</div><div class="entity-kpi-value">$837,980</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Renta Mensual</div><div class="entity-kpi-value">$16,094</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Pasivos Totales</div><div class="entity-kpi-value">$665,492</div></div>
+    </div>
+  </div>
+  <div class="entity-summary">
+    <div class="entity-header"><h3>TPARSS</h3><span>Factoraje y crédito</span></div>
+    <div class="entity-kpis">
+      <div class="entity-kpi"><div class="entity-kpi-label">Ingreso Total (mes)</div><div class="entity-kpi-value">$12,687</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Margen Operativo (mes)</div><div class="entity-kpi-value">$12,143</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Utilidad antes Imp. (mes)</div><div class="entity-kpi-value pos">$12,143</div></div>
+    </div>
+    <div class="entity-kpis" style="border-top:1px solid var(--border)">
+      <div class="entity-kpi"><div class="entity-kpi-label">Cartera de Crédito</div><div class="entity-kpi-value">$215,977</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Int. Cobrados YTD</div><div class="entity-kpi-value">$15,413</div></div>
+      <div class="entity-kpi"><div class="entity-kpi-label">Pasivos Totales</div><div class="entity-kpi-value">$677,235</div></div>
+    </div>
+  </div>
+  <p class="section-title">Sistema Konfront — Estado del Proyecto</p>
+  <div class="card">
+    <div class="konfront-grid">
+      <div class="konfront-row" style="font-weight:700;font-size:11px;color:var(--text-muted);background:none;text-transform:uppercase;letter-spacing:.5px">
+        <div>Etapa</div><div>Periodo</div><div>Estatus</div><div>Progreso</div><div>Avance</div>
+      </div>
+      <div class="konfront-row">
+          <div class="etapa">Kick-off</div>
+          <div class="periodo">abr-26</div>
+          <div><span class="badge completado">Completado</span></div>
+          <div><div class="progress-bar"><div class="progress-fill full" style="width:100%"></div></div></div>
+          <div class="progress-pct">100%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Sesiones exploratorias</div>
+          <div class="periodo">Abril–Mayo 2026</div>
+          <div><span class="badge en-curso">En curso</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">5 de N</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Prototipo alta fidelidad</div>
+          <div class="periodo">May–Ago 2026</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="progress-pct">90%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Pruebas</div>
+          <div class="periodo">Jul–Dic 26</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Bancos</div>
+          <div class="periodo">ago-26</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Intercompañías</div>
+          <div class="periodo">Sep–Oct 2026</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Gobierno</div>
+          <div class="periodo">ene-27</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- AIEH -->
+<div class="page" id="aieh">
+  <div class="update-note"><div class="update-dot"></div>Arrendadora IEH · Cifras en miles de pesos · may-26 · Generado automáticamente el 22/06/2026</div>
+  <p class="section-title">Resultados Financieros</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:42%">Concepto</th><th>may-26</th><th>YTD</th><th>% YTD</th></tr></thead>
+      <tbody><tr class='subtotal'>
+          <td><strong>Ingreso Total</strong></td>
+          <td class=""><strong>13,874</strong></td>
+          <td class=""><strong>68,163</strong></td>
+          <td class="pct">100.0%</td>
+        </tr>
+<tr>
+          <td>Depreciación</td>
+          <td class="neg">(6,978)</td>
+          <td class="neg">(34,311)</td>
+          <td class="pct">-50.3%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Financiero</strong></td>
+          <td class=""><strong>6,896</strong></td>
+          <td class=""><strong>33,735</strong></td>
+          <td class="pct">49.5%</td>
+        </tr>
+<tr>
+          <td>GG&A</td>
+          <td class="neg">(1,032)</td>
+          <td class="neg">(2,761)</td>
+          <td class="pct">-4.1%</td>
+        </tr>
+<tr>
+          <td>Gastos de Venta</td>
+          <td class="">—</td>
+          <td class="neg">(3,840)</td>
+          <td class="pct">-5.6%</td>
+        </tr>
+<tr>
+          <td>D&A</td>
+          <td class="neg">(667)</td>
+          <td class="neg">(3,334)</td>
+          <td class="pct">-4.9%</td>
+        </tr>
+<tr>
+          <td>Gasto Total</td>
+          <td class="neg">(1,699)</td>
+          <td class="neg">(9,935)</td>
+          <td class="pct">-14.6%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Operativo</strong></td>
+          <td class=""><strong>5,197</strong></td>
+          <td class=""><strong>23,800</strong></td>
+          <td class="pct">34.9%</td>
+        </tr>
+<tr>
+          <td>Gastos de Financiamiento</td>
+          <td class="neg">(12,192)</td>
+          <td class="neg">(60,363)</td>
+          <td class="pct">-88.6%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Utilidad antes de Impuestos</strong></td>
+          <td class="neg"><strong>(6,995)</strong></td>
+          <td class="neg"><strong>(36,557)</strong></td>
+          <td class="pct">-53.6%</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+  <p class="section-title">Cartera de Arrendamiento</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:35%">Cliente</th><th>% Cartera</th><th>Renta Mensual</th><th>Rentas Cobradas YTD</th><th>Saldo Insoluto</th></tr></thead>
+      <tbody><tr>
+          <td>Secretaría de Agricultura y Desarrollo Rural (SADER)</td>
+          <td>94.3%</td>
+          <td>15,024</td>
+          <td>110,876</td>
+          <td>790,552</td>
+        </tr>
+<tr>
+          <td>GIM Compañía Editorial</td>
+          <td>1.0%</td>
+          <td>190</td>
+          <td>949</td>
+          <td>8,157</td>
+        </tr>
+<tr>
+          <td>Cadena Tres I</td>
+          <td>3.0%</td>
+          <td>576</td>
+          <td>2,697</td>
+          <td>24,959</td>
+        </tr>
+<tr>
+          <td>Proveedora de Contenidos GIM</td>
+          <td>1.7%</td>
+          <td>305</td>
+          <td>305</td>
+          <td>14,312</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td>—</td>
+          <td>16,094</td>
+          <td>114,826</td>
+          <td>837,980</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="card-title">Cartera por Tipo de Activo</div><div class="chart-wrap"><canvas id="chartActivo"></canvas></div></div>
+    <div class="card"><div class="card-title">Cartera por Cliente</div><div class="chart-wrap"><canvas id="chartCliente"></canvas></div></div>
+  </div>
+  <div class="card"><div class="card-title">Ingreso Mensual 2026</div><div class="chart-wrap" style="height:200px"><canvas id="chartIngreso"></canvas></div></div>
+  <p class="section-title">Pasivos</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:30%">Acreedor</th><th>Tipo</th><th>Capital</th><th>TPP</th><th>Int. Pagados YTD</th></tr></thead>
+      <tbody><tr>
+          <td>TPARSS</td>
+          <td>Crédito</td>
+          <td>177,667</td>
+          <td>20.0%</td>
+          <td>14,344</td>
+        </tr>
+<tr>
+          <td>TPARSS</td>
+          <td>Factoraje</td>
+          <td>487,826</td>
+          <td>25.0%</td>
+          <td>46,021</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td>665,492</td>
+          <td>23.7%</td>
+          <td>60,365</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+  <p class="section-title">Sistema Konfront — Inventa 2.0</p>
+  <div class="card">
+    <div class="konfront-grid">
+      <div class="konfront-row" style="font-weight:700;font-size:11px;color:var(--text-muted);background:none;text-transform:uppercase;letter-spacing:.5px">
+        <div>Etapa</div><div>Periodo</div><div>Estatus</div><div>Progreso</div><div>Avance</div>
+      </div>
+      <div class="konfront-row">
+          <div class="etapa">Kick-off</div>
+          <div class="periodo">abr-26</div>
+          <div><span class="badge completado">Completado</span></div>
+          <div><div class="progress-bar"><div class="progress-fill full" style="width:100%"></div></div></div>
+          <div class="progress-pct">100%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Sesiones exploratorias</div>
+          <div class="periodo">Abril–Mayo 2026</div>
+          <div><span class="badge en-curso">En curso</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">5 de N</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Prototipo alta fidelidad</div>
+          <div class="periodo">May–Ago 2026</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="progress-pct">90%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">Pruebas</div>
+          <div class="periodo">Jul–Dic 26</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Bancos</div>
+          <div class="periodo">ago-26</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Intercompañías</div>
+          <div class="periodo">Sep–Oct 2026</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+<div class="konfront-row">
+          <div class="etapa">GO LIVE Gobierno</div>
+          <div class="periodo">ene-27</div>
+          <div><span class="badge pendiente">Pendiente</span></div>
+          <div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+          <div class="progress-pct">0%</div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TPARSS -->
+<div class="page" id="tparss">
+  <div class="update-note"><div class="update-dot"></div>TPARSS · Cifras en miles de pesos · may-26 · Generado automáticamente el 22/06/2026</div>
+  <p class="section-title">Resultados Financieros</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:42%">Concepto</th><th>may-26</th><th>YTD</th><th>% YTD</th></tr></thead>
+      <tbody><tr class='subtotal'>
+          <td><strong>Ingreso Total</strong></td>
+          <td class=""><strong>12,687</strong></td>
+          <td class=""><strong>61,434</strong></td>
+          <td class="pct">100.0%</td>
+        </tr>
+<tr>
+          <td>Interés Total</td>
+          <td class="neg">(524)</td>
+          <td class="neg">(4,326)</td>
+          <td class="pct">-7.0%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Financiero</strong></td>
+          <td class=""><strong>12,163</strong></td>
+          <td class=""><strong>57,108</strong></td>
+          <td class="pct">93.0%</td>
+        </tr>
+<tr>
+          <td>GG&A</td>
+          <td class="neg">(20)</td>
+          <td class="neg">(340)</td>
+          <td class="pct">-0.6%</td>
+        </tr>
+<tr>
+          <td>Gastos de Venta</td>
+          <td class="">—</td>
+          <td class="neg">(16)</td>
+          <td class="pct">-0.0%</td>
+        </tr>
+<tr>
+          <td>Gasto Total</td>
+          <td class="neg">(20)</td>
+          <td class="neg">(357)</td>
+          <td class="pct">-0.6%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Operativo</strong></td>
+          <td class=""><strong>12,143</strong></td>
+          <td class=""><strong>56,751</strong></td>
+          <td class="pct">92.4%</td>
+        </tr>
+<tr>
+          <td>Gastos de Financiamiento</td>
+          <td class="">—</td>
+          <td class="">717</td>
+          <td class="pct">1.2%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Utilidad antes de Impuestos</strong></td>
+          <td class=""><strong>12,143</strong></td>
+          <td class=""><strong>57,468</strong></td>
+          <td class="pct">93.5%</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+  <p class="section-title">Cartera de Crédito</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Detalle por Acreditado</div>
+      <table>
+        <thead><tr><th style="width:40%">Cliente</th><th>Capital</th><th>TPP</th><th>Int. Cobrados YTD</th></tr></thead>
+        <tbody><tr>
+          <td>AIEH</td>
+          <td>177,667</td>
+          <td>20.0%</td>
+          <td>14,344</td>
+        </tr>
+<tr>
+          <td>Arrendadora Cartago</td>
+          <td>38,310</td>
+          <td>15.0%</td>
+          <td>1,069</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td>215,977</td>
+          <td>19.1%</td>
+          <td>15,413</td>
+        </tr>
+</tbody>
+      </table>
+    </div>
+    <div class="card"><div class="card-title">Distribución de Cartera</div><div class="chart-wrap"><canvas id="chartCartaCredito"></canvas></div></div>
+  </div>
+  <p class="section-title">Pasivos</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:30%">Acreedor</th><th>Tipo</th><th>Capital</th><th>TPP</th><th>Int. Pagados YTD</th></tr></thead>
+      <tbody><tr>
+          <td>IEH</td>
+          <td>Crédito</td>
+          <td>55,856</td>
+          <td>13.2%</td>
+          <td>3,426</td>
+        </tr>
+<tr>
+          <td>Multiva</td>
+          <td>Factoraje</td>
+          <td>621,379</td>
+          <td>15.0%</td>
+          <td>1,401</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td>677,235</td>
+          <td>14.9%</td>
+          <td>4,827</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONSOLIDADO -->
+<div class="page" id="consolidado">
+  <div class="update-note"><div class="update-dot"></div>Grupo Consolidado · Cifras en miles de pesos · may-26 · Generado automáticamente el 22/06/2026</div>
+  <p class="section-title">Indicadores Consolidados</p>
+  <div class="kpi-grid">
+    <div class="kpi-card highlight"><div class="kpi-label">Cartera Total</div><div class="kpi-value">$876 M</div><div class="kpi-sub">Arrendamiento + Crédito</div></div>
+    <div class="kpi-card"><div class="kpi-label">Margen Financiero</div><div class="kpi-value">50.3%</div><div class="kpi-sub">Sobre ingreso total</div></div>
+    <div class="kpi-card"><div class="kpi-label">Utilidad / Cartera</div><div class="kpi-value">5.7%</div><div class="kpi-sub">Rentabilidad de cartera</div></div>
+    <div class="kpi-card highlight"><div class="kpi-label">Utilidad Inventa</div><div class="kpi-value">$4,182</div><div class="kpi-sub">Resultado neto grupo</div></div>
+  </div>
+  <p class="section-title">Resultados Financieros Consolidados</p>
+  <div class="card">
+    <table>
+      <thead><tr><th style="width:42%">Concepto</th><th>may-26</th><th>YTD</th><th>% YTD</th></tr></thead>
+      <tbody><tr>
+          <td>Ingresos por Arrendamiento</td>
+          <td class="">13,874</td>
+          <td class="">68,163</td>
+          <td class="pct">98.5%</td>
+        </tr>
+<tr>
+          <td>Ingresos por Intereses</td>
+          <td class="">495</td>
+          <td class="">1,069</td>
+          <td class="pct">1.5%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Ingreso Total</strong></td>
+          <td class=""><strong>14,369</strong></td>
+          <td class=""><strong>69,233</strong></td>
+          <td class="pct">100.0%</td>
+        </tr>
+<tr>
+          <td>Depreciación</td>
+          <td class="neg">(6,978)</td>
+          <td class="neg">(34,311)</td>
+          <td class="pct">-49.6%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Financiero</strong></td>
+          <td class=""><strong>7,391</strong></td>
+          <td class=""><strong>34,805</strong></td>
+          <td class="pct">50.3%</td>
+        </tr>
+<tr>
+          <td>GG&A</td>
+          <td class="neg">(1,052)</td>
+          <td class="neg">(3,101)</td>
+          <td class="pct">-4.5%</td>
+        </tr>
+<tr>
+          <td>Gastos de Venta</td>
+          <td class="">—</td>
+          <td class="neg">(3,856)</td>
+          <td class="pct">-5.6%</td>
+        </tr>
+<tr>
+          <td>D&A</td>
+          <td class="neg">(667)</td>
+          <td class="neg">(3,334)</td>
+          <td class="pct">-4.8%</td>
+        </tr>
+<tr>
+          <td>Gasto Total</td>
+          <td class="neg">(1,719)</td>
+          <td class="neg">(10,292)</td>
+          <td class="pct">-14.9%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Margen Operativo</strong></td>
+          <td class=""><strong>5,672</strong></td>
+          <td class=""><strong>24,513</strong></td>
+          <td class="pct">35.4%</td>
+        </tr>
+<tr>
+          <td>Gastos de Financiamiento</td>
+          <td class="neg">(524)</td>
+          <td class="neg">(3,608)</td>
+          <td class="pct">-5.2%</td>
+        </tr>
+<tr class='subtotal'>
+          <td><strong>Utilidad antes de Impuestos</strong></td>
+          <td class=""><strong>5,149</strong></td>
+          <td class=""><strong>20,911</strong></td>
+          <td class="pct">30.2%</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
+  <p class="section-title">Composición del Ingreso</p>
+  <div class="two-col">
+    <div class="card"><div class="card-title">Ingresos del Mes</div><div class="chart-wrap"><canvas id="chartIngMes"></canvas></div></div>
+    <div class="card"><div class="card-title">Ingresos YTD</div><div class="chart-wrap"><canvas id="chartIngYtd"></canvas></div></div>
+  </div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['inicio','aieh','tparss','consolidado'].indexOf(id);
+  document.querySelectorAll('nav button')[idx].classList.add('active');
+}
+const C = { primary:'#0A2240', accent:'#1A6BAE', highlight:'#00A99D', warn:'#E84545' };
+const pieOpts = {
+  responsive:true, maintainAspectRatio:false,
+  plugins:{ legend:{ position:'right', labels:{ font:{size:12}, padding:14 } },
+    tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString()}` } }
+  }
+};
+new Chart(document.getElementById('chartActivo'), {
+  type:'doughnut',
+  data:{ labels:["Maquinaria y Equipo", "Equipo de C\u00f3mputo"], datasets:[{ data:[450651961, 37448403], backgroundColor:[C.accent,C.highlight,'#F5A623'], borderWidth:2, borderColor:'#fff' }] },
+  options:{ ...pieOpts, plugins:{ ...pieOpts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString()}` } } } }
+});
+new Chart(document.getElementById('chartCliente'), {
+  type:'doughnut',
+  data:{ labels:["Secretar\u00eda de Agricultura y De", "GIM Compa\u00f1\u00eda Editorial", "Cadena Tres I", "Proveedora de Contenidos GIM"], datasets:[{ data:[790552, 8157, 24959, 14312], backgroundColor:[C.accent,C.highlight,'#F5A623',C.warn], borderWidth:2, borderColor:'#fff' }] },
+  options:pieOpts
+});
+new Chart(document.getElementById('chartIngreso'), {
+  type:'bar',
+  data:{ labels:["ene-26", "feb-26", "mar-26", "abr-26", "may-26", "jun-26"], datasets:[{ label:'Ingreso mensual (MXN miles)', data:[13556.2, 13556.2, 13564.8, 13611.8, 13874.3, 922.8], backgroundColor:C.accent, borderRadius:6, borderSkipped:false }] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` $${ctx.parsed.y.toLocaleString()}k`}} },
+    scales:{ y:{ beginAtZero:true, ticks:{callback: v => '$'+v.toLocaleString()+'k'}, grid:{color:'#EEF2F8'} }, x:{grid:{display:false}} }
+  }
+});
+new Chart(document.getElementById('chartCartaCredito'), {
+  type:'doughnut',
+  data:{ labels:["AIEH", "Arrendadora Cartago"], datasets:[{ data:[177667, 38310], backgroundColor:[C.accent,C.highlight], borderWidth:2, borderColor:'#fff' }] },
+  options:pieOpts
+});
+new Chart(document.getElementById('chartIngMes'), {
+  type:'doughnut',
+  data:{ labels:["Arrendamiento", "Intereses"], datasets:[{ data:[13874, 495], backgroundColor:[C.accent,C.highlight], borderWidth:2, borderColor:'#fff' }] },
+  options:pieOpts
+});
+new Chart(document.getElementById('chartIngYtd'), {
+  type:'doughnut',
+  data:{ labels:["Arrendamiento", "Intereses"], datasets:[{ data:[68163, 1069], backgroundColor:[C.accent,C.highlight], borderWidth:2, borderColor:'#fff' }] },
+  options:pieOpts
+});
+</script>
+
+<!-- PANTALLA DE ACCESO -->
+<div id="lockscreen" style="position:fixed;inset:0;z-index:9999;background:#4A4A4A;display:flex;align-items:center;justify-content:center;font-family:Aptos,Calibri,sans-serif;">
+  <div style="background:#fff;border-radius:6px;padding:48px 52px;width:340px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.35);">
+    <div style="font-size:22px;font-weight:700;color:#4A4A4A;margin-bottom:4px;">AXXON Group</div>
+    <div style="font-size:11px;color:#7A7269;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:32px;">Dashboard Ejecutivo</div>
+    <input id="pwd" type="password" placeholder="Contrasena" style="width:100%;padding:10px 14px;border:1px solid #D4CCBF;border-radius:3px;font-size:14px;outline:none;color:#2D2D2D;" onkeydown="if(event.key=='Enter')checkPwd()" />
+    <div id="pwd-err" style="color:#B22222;font-size:12px;margin-top:8px;min-height:18px;"></div>
+    <button onclick="checkPwd()" style="margin-top:12px;width:100%;padding:11px;background:#4A4A4A;color:#E5E1DA;border:none;border-radius:3px;font-size:13px;font-weight:600;cursor:pointer;">INGRESAR</button>
+    <div style="margin-top:24px;font-size:10px;color:#C8C0B0;">CONFIDENCIAL / USO INTERNO</div>
+  </div>
+</div>
+<script>
+(function(){
+  var H="ac7802bbc7bb3da44454148d910462a6759b658f21ac4ef1a9f45ca547387c2f";
+  function s256(v){
+    return crypto.subtle.digest("SHA-256",new TextEncoder().encode(v))
+      .then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("");});
+  }
+  if(sessionStorage.getItem("axxon_auth")==="1"){document.getElementById("lockscreen").style.display="none";}
+  window.checkPwd=function(){
+    var v=document.getElementById("pwd").value;
+    s256(v).then(function(h){
+      if(h===H){sessionStorage.setItem("axxon_auth","1");document.getElementById("lockscreen").style.display="none";}
+      else{document.getElementById("pwd-err").textContent="Contrasena incorrecta";document.getElementById("pwd").value="";document.getElementById("pwd").focus();}
+    });
+  };
+})();
+</script>
+</body>
+</html>
