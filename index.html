@@ -420,6 +420,20 @@
     <div class="card"><div class="card-title">Ingresos del Mes</div><div class="chart-wrap"><canvas id="chartIngMes"></canvas></div></div>
     <div class="card"><div class="card-title">Ingresos YTD</div><div class="chart-wrap"><canvas id="chartIngYtd"></canvas></div></div>
   </div>
+  <p class="section-title">Cartera Total del Grupo</p>
+  <div class="two-col">
+    <div class="card"><div class="card-title">Arrendamiento vs Crédito</div><div class="chart-wrap"><canvas id="chartCarteraTotal"></canvas></div></div>
+    <div class="card" style="display:flex;align-items:center;justify-content:center;">
+      <div style="text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;">Cartera Total</div>
+        <div style="font-size:32px;font-weight:800;color:var(--brand-primary);">$876 M</div>
+        <div style="margin-top:16px;font-size:12px;color:var(--text-muted);">
+          <div style="margin-bottom:6px;"><span style="display:inline-block;width:12px;height:12px;background:#4A4A4A;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Arrendamiento: {aieh_cartera_total_js:,}</div>
+          <div><span style="display:inline-block;width:12px;height:12px;background:#C8C0B0;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Crédito: {tparss_cartera_total_js:,}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
@@ -438,28 +452,40 @@ const pieOpts = {
     tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString('en-US')}` } }
   }
 };
+const cartPieOpts = function(total){
+  return {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{ position:'right', labels:{ font:{size:12}, padding:14 } },
+      tooltip:{ callbacks:{ label:function(ctx){
+        var pct = total>0 ? (ctx.parsed/total*100).toFixed(1) : 0;
+        return ' '+ctx.label+': '+ctx.parsed.toLocaleString('en-US')+' ('+pct+'%)';
+      } } }
+    }
+  };
+};
 new Chart(document.getElementById('chartActivo'), {
   type:'doughnut',
   data:{ labels:["Maquinaria y Equipo", "Equipo de C\u00f3mputo"], datasets:[{ data:[450651961, 37448403], backgroundColor:['#4A4A4A','#C8C0B0','#9A9288'], borderWidth:2, borderColor:'#fff' }] },
-  options:{ ...pieOpts, plugins:{ ...pieOpts.plugins, tooltip:{ callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString('en-US')}` } } } }
+  options:cartPieOpts(488100364.3630568)
 });
 new Chart(document.getElementById('chartCliente'), {
   type:'doughnut',
   data:{ labels:["Secretar\u00eda de Agricultura y De", "GIM Compa\u00f1\u00eda Editorial", "Cadena Tres I", "Proveedora de Contenidos GIM"], datasets:[{ data:[790552, 8157, 24959, 14312], backgroundColor:['#4A4A4A','#C8C0B0','#9A9288','#7A7269'], borderWidth:2, borderColor:'#fff' }] },
-  options:pieOpts
+  options:cartPieOpts(837980)
 });
 new Chart(document.getElementById('chartIngreso'), {
   type:'bar',
   data:{ labels:["ene-26", "feb-26", "mar-26", "abr-26", "may-26", "jun-26"], datasets:[{ label:'Ingreso mensual (MXN miles)', data:[13556.2, 13556.2, 13564.8, 13611.8, 13874.3, 922.8], backgroundColor:'#9A9288', borderRadius:6, borderSkipped:false }] },
   options:{ responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` $${ctx.parsed.y.toLocaleString('en-US')}k`}} },
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` $${ctx.parsed.y.toLocaleString('en-US')}`}} },
     scales:{ y:{ beginAtZero:true, ticks:{display:false}, grid:{display:false}, border:{display:false} }, x:{grid:{display:false}} }
   }
 });
 new Chart(document.getElementById('chartCartaCredito'), {
   type:'doughnut',
   data:{ labels:["AIEH", "Arrendadora Cartago"], datasets:[{ data:[177667, 38310], backgroundColor:['#4A4A4A','#C8C0B0'], borderWidth:2, borderColor:'#fff' }] },
-  options:pieOpts
+  options:cartPieOpts(215977)
 });
 new Chart(document.getElementById('chartIngMes'), {
   type:'doughnut',
@@ -497,7 +523,7 @@ function fmtEeff(v) {
   if(v===null||v===undefined) return '—';
   var n = parseFloat(v); if(isNaN(n)) return '—';
   var abs = Math.abs(n);
-  var s = abs >= 10000 ? Math.round(abs).toLocaleString('en-US') : abs.toFixed(1);
+  var s = abs >= 1000 ? Math.round(abs).toLocaleString('en-US') : abs.toFixed(1);
   return (n<0?'(':'')+s+(n<0?')':'');
 }
 function pctEeff(v) {
@@ -536,7 +562,7 @@ var tparssOpexData = [{"month": 1, "label": "ene-26", "total": 19.89, "ytd": 19.
 var aiehOpexChart  = null;
 var tparssOpexChart = null;
 
-function fmtOpex(v){ return '$'+Math.round(v).toLocaleString('en-US'); }
+function fmtOpex(v){ return Math.round(v).toLocaleString('en-US'); }
 
 function buildOpexBtns(data, containerId, updateFn, activeLabel) {
   var c = document.getElementById(containerId);
@@ -607,6 +633,15 @@ function updateTparssOpex(label) {
   buildOpexBtns(tparssOpexData,'tparss-opex-month-btns',updateTparssOpex,label);
 }
 
+// Cartera Total Consolidado
+var cartTotalArr  = 837980;
+var cartTotalCred = 215977;
+var cartTotalSum  = (cartTotalArr + cartTotalCred) || 1;
+new Chart(document.getElementById('chartCarteraTotal'), {
+  type:'doughnut',
+  data:{ labels:['Arrendamiento','Crédito'], datasets:[{ data:[cartTotalArr, cartTotalCred], backgroundColor:['#4A4A4A','#C8C0B0'], borderWidth:2, borderColor:'#fff' }] },
+  options:cartPieOpts(cartTotalSum)
+});
 // Inicializar charts y seleccionar último mes disponible
 var aiehInitLabel  = aiehOpexData.length  ? aiehOpexData[aiehOpexData.length-1].label   : '';
 var tparssInitLabel = tparssOpexData.length ? tparssOpexData[tparssOpexData.length-1].label : '';
