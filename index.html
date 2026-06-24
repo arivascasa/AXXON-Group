@@ -583,10 +583,9 @@ function buildFlujoChart(canvasId, data) {
       },
       scales: {
         y: {
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { callback: function(v) {
-            return Math.abs(v) >= 1000 ? Math.round(Math.abs(v)/1000)+'k' : v;
-          } }
+          grid: { display: false },
+          border: { display: false },
+          ticks: { display: false }
         },
         x: { grid: { display: false } }
       }
