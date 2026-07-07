@@ -241,7 +241,7 @@
   <div class="two-col" style="margin-top:16px;">
     <div class="card">
       <div class="card-title" id="aieh-opex-chart-title">Desglose por Tipo de Gasto</div>
-      <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexAIEH"></canvas></div>
+      <div class="chart-wrap" style="height:210px;"><canvas id="chartOpexAIEH"></canvas></div>
     </div>
     <div class="card">
       <div class="card-title">Detalle OPEX</div>
@@ -391,7 +391,7 @@
   <div class="two-col" style="margin-top:16px;">
     <div class="card">
       <div class="card-title" id="tparss-opex-chart-title">Desglose por Tipo de Gasto</div>
-      <div class="chart-wrap" style="height:280px;"><canvas id="chartOpexTPARSS"></canvas></div>
+      <div class="chart-wrap" style="height:210px;max-width:320px;margin:0 auto;"><canvas id="chartOpexTPARSS"></canvas></div>
     </div>
     <div class="card">
       <div class="card-title">Detalle OPEX</div>
@@ -524,8 +524,8 @@ function buildFlujoChart(canvasId, data) {
         {
           label: 'Entradas',
           data: entradas,
-          backgroundColor: 'rgba(26,92,42,0.75)',
-          borderColor: '#1A5C2A',
+          backgroundColor: 'rgba(104,131,162,0.75)',
+          borderColor: '#6883A2',
           borderWidth: 1,
           borderRadius: 4,
           stack: 'bars',
