@@ -354,6 +354,7 @@
     </div>
     <div class="card"><div class="card-title">Distribución de Cartera</div><div class="chart-wrap"><canvas id="chartCartaCredito"></canvas></div></div>
   </div>
+  <div class="card"><div class="card-title">Colocación Mensual</div><div class="chart-wrap" style="height:200px"><canvas id="chartIngresoTPARSS"></canvas></div></div>
   <p class="section-title">Pasivos</p>
   <div class="card">
     <table>
@@ -484,6 +485,14 @@ new Chart(document.getElementById('chartCliente'), {
 new Chart(document.getElementById('chartIngreso'), {
   type:'bar',
   data:{ labels:["sep-25", "oct-25", "nov-25", "dic-25", "ene-26", "feb-26", "mar-26", "abr-26", "may-26", "jun-26", "jul-26"], datasets:[{ label:'Colocación mensual (MXN miles)', data:[53560.8, 35826.3, 361264.9, 0, 25414.3, 0, 2786.7, 0, 9247.4, 0, 0], backgroundColor:'#6883A2', borderRadius:6, borderSkipped:false }] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` ${Math.round(ctx.parsed.y).toLocaleString('en-US')}`}} },
+    scales:{ y:{ beginAtZero:true, ticks:{display:false}, grid:{display:false}, border:{display:false} }, x:{grid:{display:false}} }
+  }
+});
+new Chart(document.getElementById('chartIngresoTPARSS'), {
+  type:'bar',
+  data:{ labels:[], datasets:[{ label:'Colocación mensual (MXN miles)', data:[], backgroundColor:'#6883A2', borderRadius:6, borderSkipped:false }] },
   options:{ responsive:true, maintainAspectRatio:false,
     plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` ${Math.round(ctx.parsed.y).toLocaleString('en-US')}`}} },
     scales:{ y:{ beginAtZero:true, ticks:{display:false}, grid:{display:false}, border:{display:false} }, x:{grid:{display:false}} }
