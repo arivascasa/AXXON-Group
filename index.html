@@ -492,7 +492,7 @@ new Chart(document.getElementById('chartIngreso'), {
 });
 new Chart(document.getElementById('chartIngresoTPARSS'), {
   type:'bar',
-  data:{ labels:[], datasets:[{ label:'Colocación mensual (MXN miles)', data:[], backgroundColor:'#6883A2', borderRadius:6, borderSkipped:false }] },
+  data:{ labels:["dic-25", "ene-26", "feb-26", "mar-26", "abr-26", "may-26", "jun-26"], datasets:[{ label:'Colocación mensual (MXN miles)', data:[243133, 46000, 35000, 41110, 14800, 13600, 3000], backgroundColor:'#6883A2', borderRadius:6, borderSkipped:false }] },
   options:{ responsive:true, maintainAspectRatio:false,
     plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => ` ${Math.round(ctx.parsed.y).toLocaleString('en-US')}`}} },
     scales:{ y:{ beginAtZero:true, ticks:{display:false}, grid:{display:false}, border:{display:false} }, x:{grid:{display:false}} }
