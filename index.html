@@ -100,7 +100,7 @@
   </div>
 </div>
   <div class="update-note"><div class="update-dot"></div>
-    Datos al cierre de jul-26 · Generado automáticamente el 12/08/2026
+    Datos al cierre de jul-26 · Generado automáticamente el 13/08/2026
   </div>
   <p class="section-title">Efectivo del Grupo</p>
   <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
@@ -124,20 +124,23 @@
     <div class="kpi-card"><div class="kpi-label">Número de Clientes</div><div class="kpi-value">5</div><div class="kpi-sub">92.9% en Secretaría de Agricultura </div></div>
     <div class="kpi-card"><div class="kpi-label">Tasa Activa Ponderada</div><div class="kpi-value">29.8%</div><div class="kpi-sub">Spread +10.1 pp vs pasiva 19.7%</div></div>
     <div class="kpi-card"><div class="kpi-label">Vida Remanente</div><div class="kpi-value">49.1 meses</div><div class="kpi-sub">Al corte 31/07/2026</div></div>
+    <div class="kpi-card"><div class="kpi-label">Cartera de Crédito</div><div class="kpi-value">$0.0 M</div><div class="kpi-sub">Cadena Tres I</div></div>
   </div>
   <p class="section-title">Indicadores Axxon Capital</p>
   <div class="kpi-grid">
-    <div class="kpi-card highlight"><div class="kpi-label">Cartera de Crédito</div><div class="kpi-value">$555.5 M</div><div class="kpi-sub">Incluye $197.4 M intercompañía</div></div>
-    <div class="kpi-card"><div class="kpi-label">Número de Clientes</div><div class="kpi-value">4</div><div class="kpi-sub">CRÉDITO TPARSS → AIEH · CRÉDITO TPARSS → ARRENDADO · FACTORAJE TPARSS → AIEH · CO-PRODUCCIÓN AIEH → CADEN</div></div>
+    <div class="kpi-card highlight"><div class="kpi-label">Cartera de Crédito</div><div class="kpi-value">$235.7 M</div><div class="kpi-sub">Incluye $197.4 M intercompañía</div></div>
+    <div class="kpi-card highlight"><div class="kpi-label">Cartera de Factoraje</div><div class="kpi-value">$319.8 M</div><div class="kpi-sub">Incluye $319.8 M intercompañía</div></div>
+    <div class="kpi-card"><div class="kpi-label">Número de Clientes</div><div class="kpi-value">2</div><div class="kpi-sub">AIEH · Arrendadora Cartago</div></div>
     <div class="kpi-card"><div class="kpi-label">Tasa Activa Ponderada</div><div class="kpi-value">18.9%</div><div class="kpi-sub">Spread +5.6 pp vs pasiva 13.3%</div></div>
-    <div class="kpi-card"><div class="kpi-label">Intereses Cobrados</div><div class="kpi-value">$86.9 M</div><div class="kpi-sub">YTD</div></div>
+    <div class="kpi-card"><div class="kpi-label">Intereses Cobrados</div><div class="kpi-value">$22.4 M</div><div class="kpi-sub">YTD · crédito</div></div>
+    <div class="kpi-card"><div class="kpi-label">Intereses de Factoraje</div><div class="kpi-value">$64.4 M</div><div class="kpi-sub">YTD · factoraje</div></div>
   </div>
 
 </div>
 
 <!-- AIEH -->
 <div class="page" id="aieh">
-  <div class="update-note"><div class="update-dot"></div>Axxon Leasing · Cifras en miles de pesos · jul-26 · Generado automáticamente el 12/08/2026</div>
+  <div class="update-note"><div class="update-dot"></div>Axxon Leasing · Cifras en miles de pesos · jul-26 · Generado automáticamente el 13/08/2026</div>
   <p class="section-title">Resultados Financieros</p>
   <div id="aieh-eeff-month-btns" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
   <div class="card">
@@ -203,6 +206,26 @@
     <div class="card"><div class="card-title">Cartera por Cliente</div><div class="chart-wrap"><canvas id="chartCliente"></canvas></div></div>
   </div>
   <div class="card"><div class="card-title">Colocación Mensual</div><div class="chart-wrap" style="height:200px"><canvas id="chartIngreso"></canvas></div></div>
+  <p class="section-title">Cartera de Crédito</p>
+  <div class="card">
+    <div class="card-title">Detalle por Acreditado</div>
+    <table>
+      <thead><tr><th style="width:45%">Acreditado</th><th>Capital</th><th>TPP</th><th>Int. Cobrados YTD</th></tr></thead>
+      <tbody><tr>
+          <td>Cadena Tres I</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
   <p class="section-title">Pasivos</p>
   <div class="card">
     <table>
@@ -254,7 +277,7 @@
 
 <!-- TPARSS -->
 <div class="page" id="tparss">
-  <div class="update-note"><div class="update-dot"></div>Axxon Capital · Cifras en miles de pesos · jul-26 · Generado automáticamente el 12/08/2026</div>
+  <div class="update-note"><div class="update-dot"></div>Axxon Capital · Cifras en miles de pesos · jul-26 · Generado automáticamente el 13/08/2026</div>
   <p class="section-title">Resultados Financieros</p>
   <div id="tparss-eeff-month-btns" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;"></div>
   <div class="card">
@@ -273,34 +296,22 @@
       <table>
         <thead><tr><th style="width:40%">Cliente</th><th>Capital</th><th>TPP</th><th>Int. Cobrados YTD</th></tr></thead>
         <tbody><tr>
-          <td>CRÉDITO TPARSS → AIEH</td>
+          <td>AIEH</td>
           <td>197,367</td>
           <td>19.7%</td>
           <td>20,383</td>
         </tr>
 <tr>
-          <td>CRÉDITO TPARSS → ARRENDADORA CARTAGO</td>
+          <td>Arrendadora Cartago</td>
           <td>38,310</td>
           <td>15.0%</td>
           <td>2,043</td>
         </tr>
-<tr>
-          <td>FACTORAJE TPARSS → AIEH</td>
-          <td>319,801</td>
-          <td>n/a</td>
-          <td>64,430</td>
-        </tr>
-<tr>
-          <td>CO-PRODUCCIÓN AIEH → CADENA TRES I</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
 <tr  class="total-row">
           <td><strong>Total</strong></td>
-          <td>555,478</td>
+          <td>235,677</td>
           <td>18.9%</td>
-          <td>86,856</td>
+          <td>22,426</td>
         </tr>
 </tbody>
       </table>
@@ -308,6 +319,24 @@
     <div class="card"><div class="card-title">Distribución de Cartera</div><div class="chart-wrap"><canvas id="chartCartaCredito"></canvas></div></div>
   </div>
   <div class="card"><div class="card-title">Colocación Mensual</div><div class="chart-wrap" style="height:200px"><canvas id="chartIngresoTPARSS"></canvas></div></div>
+  <p class="section-title">Cartera de Factoraje</p>
+  <div class="card">
+    <div class="card-title">Detalle por Factorado · derechos de cobro</div>
+    <table>
+      <thead><tr><th style="width:55%">Factorado</th><th>Capital</th><th>Int. Cobrados YTD</th></tr></thead>
+      <tbody><tr>
+          <td>AIEH</td>
+          <td>319,801</td>
+          <td>64,430</td>
+        </tr>
+<tr  class="total-row">
+          <td><strong>Total</strong></td>
+          <td>319,801</td>
+          <td>64,430</td>
+        </tr>
+</tbody>
+    </table>
+  </div>
   <p class="section-title">Pasivos</p>
   <div class="card">
     <table>
@@ -366,7 +395,7 @@
 
 <!-- CONSOLIDADO -->
 <div class="page" id="consolidado">
-  <div class="update-note"><div class="update-dot"></div>Grupo Consolidado · Cifras en miles de pesos · jul-26 · Generado automáticamente el 12/08/2026</div>
+  <div class="update-note"><div class="update-dot"></div>Grupo Consolidado · Cifras en miles de pesos · jul-26 · Generado automáticamente el 13/08/2026</div>
   <p class="section-title">Indicadores Consolidados</p>
   <div class="kpi-grid">
     <div class="kpi-card highlight"><div class="kpi-label">Cartera Total</div><div class="kpi-value">$857.2 M</div><div class="kpi-sub">Arrendamiento + Crédito</div></div>
@@ -460,8 +489,8 @@ new Chart(document.getElementById('chartIngresoTPARSS'), {
 });
 new Chart(document.getElementById('chartCartaCredito'), {
   type:'doughnut',
-  data:{ labels:["CR\u00c9DITO TPARSS \u2192 AIEH", "CR\u00c9DITO TPARSS \u2192 ARRENDADORA CARTAGO", "FACTORAJE TPARSS \u2192 AIEH", "CO-PRODUCCI\u00d3N AIEH \u2192 CADENA TRES I"], datasets:[{ data:[197367, 38310, 319801, 0], backgroundColor:['#081358','#6883A2'], borderWidth:2, borderColor:'#fff' }] },
-  options:cartPieOpts(555478)
+  data:{ labels:["AIEH", "Arrendadora Cartago"], datasets:[{ data:[197367, 38310], backgroundColor:['#081358','#6883A2'], borderWidth:2, borderColor:'#fff' }] },
+  options:cartPieOpts(235677)
 });
 new Chart(document.getElementById('chartIngMes'), {
   type:'doughnut',
