@@ -118,11 +118,10 @@
   <div class="kpi-grid">
     <div class="kpi-card highlight"><div class="kpi-label">Cartera</div><div class="kpi-value">$818.9 M</div><div class="kpi-sub">Saldo insoluto</div></div>
     <div class="kpi-card"><div class="kpi-label">Renta Mensual</div><div class="kpi-value">$16.4 M</div><div class="kpi-sub">IVA incluido</div></div>
-    <div class="kpi-card"><div class="kpi-label">Número de Activos</div><div class="kpi-value">1,039</div><div class="kpi-sub">Maquinaria y Equipo: 50 · Equipo de Cómputo: 988 · Sin clasificar: 1</div></div>
+    <div class="kpi-card"><div class="kpi-label">Número de Activos</div><div class="kpi-value">1,038</div><div class="kpi-sub">Maquinaria y Equipo: 50 · Equipo de Cómputo: 988</div></div>
     <div class="kpi-card"><div class="kpi-label">Ticket Promedio · Maquinaria y Equipo</div><div class="kpi-value">$9.0 M</div><div class="kpi-sub">por activo · 50 activos · $450.7 M</div></div>
     <div class="kpi-card"><div class="kpi-label">Ticket Promedio · Equipo de Cómputo</div><div class="kpi-value">$49.6 k</div><div class="kpi-sub">por activo · 988 activos · $49.0 M</div></div>
-    <div class="kpi-card"><div class="kpi-label">Ticket Promedio · Sin clasificar</div><div class="kpi-value">$0</div><div class="kpi-sub">por activo · 1 activos · $0.0 M</div></div>
-    <div class="kpi-card"><div class="kpi-label">Número de Clientes</div><div class="kpi-value">6</div><div class="kpi-sub">92.9% en Secretaría de Agricultura </div></div>
+    <div class="kpi-card"><div class="kpi-label">Número de Clientes</div><div class="kpi-value">5</div><div class="kpi-sub">92.9% en Secretaría de Agricultura </div></div>
     <div class="kpi-card"><div class="kpi-label">Tasa Activa Ponderada</div><div class="kpi-value">29.8%</div><div class="kpi-sub">Spread +10.1 pp vs pasiva 19.7%</div></div>
     <div class="kpi-card"><div class="kpi-label">Vida Remanente</div><div class="kpi-value">49.1 meses</div><div class="kpi-sub">Al corte 31/07/2026</div></div>
   </div>
@@ -188,13 +187,6 @@
           <td>190</td>
           <td>1,328</td>
           <td>7,778</td>
-        </tr>
-<tr>
-          <td>CONAGUA</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
         </tr>
 <tr  class="total-row">
           <td><strong>Total</strong></td>
@@ -447,7 +439,7 @@ new Chart(document.getElementById('chartActivo'), {
 });
 new Chart(document.getElementById('chartCliente'), {
   type:'doughnut',
-  data:{ labels:["Secretar\u00eda de Agricultura y De", "Cadena Tres I", "Proveedora de Contenidos GIM", "Servicios Empresariales Multim", "GIM Compa\u00f1\u00eda Editorial", "CONAGUA"], datasets:[{ data:[760504, 23802, 13703, 13152, 7778, 0], backgroundColor:['#081358','#6883A2','#BC0006','#6A0207'], borderWidth:2, borderColor:'#fff' }] },
+  data:{ labels:["Secretar\u00eda de Agricultura y De", "Cadena Tres I", "Proveedora de Contenidos GIM", "Servicios Empresariales Multim", "GIM Compa\u00f1\u00eda Editorial"], datasets:[{ data:[760504, 23802, 13703, 13152, 7778], backgroundColor:['#081358','#6883A2','#BC0006','#6A0207'], borderWidth:2, borderColor:'#fff' }] },
   options:cartPieOpts(818939)
 });
 new Chart(document.getElementById('chartIngreso'), {
